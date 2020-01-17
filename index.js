@@ -82,8 +82,15 @@ wss.on('request', (request) => {
 
 sub.on('message', (channel, msg) => {
   console.log(`[redis] ${msg}`)
-  listeners.forEach(conn => {
-    conn.sendUTF(msg)
+  listeners = listeners.select(conn => {
+    try {
+      conn.sendUTF(msg)
+      return true
+    }
+    catch (ex) {
+      console.warn(err);
+      return false
+    }
   })
 });
 
