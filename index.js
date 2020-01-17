@@ -82,7 +82,7 @@ wss.on('request', (request) => {
 
 sub.on('message', (channel, msg) => {
   console.log(`[redis] ${msg}`)
-  listeners = listeners.select(conn => {
+  listeners = listeners.filter(conn => {
     try {
       conn.sendUTF(msg)
       return true
