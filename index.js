@@ -38,7 +38,6 @@ wss.on('request', (request) => {
         client.KEYS('/data/*', (err, data) => {
           if (err) throw err;
 
-          console.log("/data/ keys: ", data)
           data.forEach(key => {
             client.HGETALL(key, (err, data) => {
               if (err) throw err;
@@ -56,11 +55,12 @@ wss.on('request', (request) => {
           if (err) throw err;
 
           console.log(data);
-          for (const key in data) {
+          for (let key in data) {
+            key = key.slice(6);
             if (msg[key]) return;
 
             client.DEL(`/data/${key}`);
-            client.publish('/data', JSON.stringify({ kind: 'delete', key: key.slice(6) }));
+            client.publish('/data', JSON.stringify({ kind: 'delete', key }));
           }
         })
         for (const key in msg.data) {
