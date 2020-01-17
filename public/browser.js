@@ -1,4 +1,4 @@
-const ws = new WebSocket(`ws://${document.location.host}`, 'gggv');
+const ws = new WebSocket(`wss://${document.location.host}`, 'gggv');
 const main = document.getElementById('main');
 
 ws.addEventListener('open', event => {
@@ -49,8 +49,8 @@ let doSetup = ({ key, min, max, value }) => {
 
   const existing = document.getElementById(`${key}-slider`);
   if (existing) {
-    existing.setAttribute("min", min);
-    existing.setAttribute("max", max)
+    existing.setAttribute('min', min);
+    existing.setAttribute('max', max);
     return;
   }
 
