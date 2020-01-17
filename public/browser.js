@@ -1,4 +1,4 @@
-const ws = new WebSocket(`ws://${document.location.host}`, 'gggv');
+const ws = new WebSocket(`wss://${document.location.host}`, 'gggv');
 const main = document.getElementById('main');
 
 ws.addEventListener('open', event => {
