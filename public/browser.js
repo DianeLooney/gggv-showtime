@@ -1,4 +1,4 @@
-const ws = new WebSocket(`wss://${document.location.host}`, 'gggv');
+const ws = new WebSocket(`ws://${document.location.host}`, 'gggv');
 const main = document.getElementById('main');
 
 ws.addEventListener('open', event => {
@@ -46,6 +46,14 @@ let doUpdate = ({ key, value }) => {
 
 let doSetup = ({ key, min, max, value }) => {
   state[key] = { value, min, max };
+
+  const existing = document.getElementById(`${key}-slider`);
+  if (existing) {
+    existing.setAttribute("min", min);
+    existing.setAttribute("max", max)
+    return;
+  }
+
   // recreate all html elements
   const container = document.createElement('DIV');
   container.id = `${key}-container`
