@@ -5,6 +5,9 @@
   "repository": "git@github.com:DianeLooney/gggv-showtime.git",
   "author": "Diane Looney <diane@dianelooney.com>",
   "license": "MIT",
+  "scripts": {
+    "start": "node index.js"
+  },
   "dependencies": {
     "finalhandler": "^1.1.2",
     "redis": "^2.8.0",
