@@ -55,7 +55,7 @@ wss.on('request', (request) => {
           if (err) throw err;
 
           console.log(data);
-          for (let key in data) {
+          for (let key of data) {
             key = key.slice(6);
             if (msg[key]) return;
 
