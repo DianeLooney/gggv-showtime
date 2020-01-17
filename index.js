@@ -57,7 +57,7 @@ wss.on('request', (request) => {
           console.log(data);
           for (let key of data) {
             key = key.slice(6);
-            if (msg[key]) return;
+            if (msg.data[key]) return;
 
             client.DEL(`/data/${key}`);
             client.publish('/data', JSON.stringify({ kind: 'delete', key }));
@@ -67,7 +67,7 @@ wss.on('request', (request) => {
           const { min, max, value } = msg.data[key];
           client.HSET(`/data/${key}`, 'min', min);
           client.HSET(`/data/${key}`, 'max', max);
-          client.HSET(`/data/${key}`, 'value', value);
+          client.HSETNX(`/data/${key}`, 'value', value);
           client.publish('/data', JSON.stringify({ kind: 'setup', key, min, max, value }));
         }
         break;
