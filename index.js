@@ -67,7 +67,7 @@ wss.on('request', (request) => {
           const { min, max, value } = msg.data[key];
           client.HSET(`/data/${key}`, 'min', min);
           client.HSET(`/data/${key}`, 'max', max);
-          client.HSETNX(`/data/${key}`, 'value', value);
+          client.HSET(`/data/${key}`, 'value', value);
           client.publish('/data', JSON.stringify({ kind: 'setup', key, min, max, value }));
         }
         break;
