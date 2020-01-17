@@ -57,7 +57,7 @@ wss.on('request', (request) => {
 
           console.log(data);
           for (const key in data) {
-            if (msg[k]) return;
+            if (msg[key]) return;
 
             client.DEL(`/data/${key}`);
             client.publish('/data', JSON.stringify({ kind: 'delete', key: key.slice(6) }));
